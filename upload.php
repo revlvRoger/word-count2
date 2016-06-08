@@ -8,13 +8,17 @@
 <h1>Upload Image</h1>
 <?php
 
-$image = __DIR__. '/'. md5(date('Y-m-d H:i:s')) . '.jpg';
 
 class Upload
 {
     public function uploadedFile($image)
     {
-        move_uploaded_file($_FILES['image']['tmp_name'], $image);
+        $photo = md5(date('Y-m-d H:i:s')) . '.jpg';
+        $image = __DIR__. '/'. $photo;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $image))
+        {
+        echo "<img src=\"$photo\">";
+        }
     }
 }
     $uploaded = new Upload();
